@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.get('/new/deck/shuffled', (req, res) => {
 
-    const newDeck = set.buildDeck();
+    const newDeck = set.buildDeck(true);
 
     res.json(newDeck);
 
@@ -26,7 +26,7 @@ app.get('/new/deck/shuffled', (req, res) => {
 
 app.get('/new/deck/', (req, res) => {
 
-    const newDeck = set.buildDeck(false);
+    const newDeck = set.buildDeck();
 
     res.json(newDeck);
 

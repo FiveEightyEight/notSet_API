@@ -150,7 +150,7 @@ const allDecks = {
 */
 
 
-const buildDeck = (shuffled = true) => {
+const buildDeck = (shuffled = false) => {
     if (shuffled) {
         const deck_id = ID();
         const cards = shuffle(buildAllCards());
@@ -176,6 +176,10 @@ const buildDeck = (shuffled = true) => {
             shuffled,
         }
     }
+
+}
+
+const draw = () => {
 
 }
 

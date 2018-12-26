@@ -26,19 +26,19 @@ const buildAllCards = () => {
     const shape = ['ov', 'sq', 'di'];
     const number = ['n1', 'n2', 'n3'];
     const shading = ['sd', 'st', 'ol'];
-    const deck = [];
+    const cards = [];
 
     for (let c = 0; c < colors.length; c++) {
         for (let s = 0; s < shape.length; s++) {
             for (let n = 0; n < number.length; n++) {
                 for (let d = 0; d < shading.length; d++) {
-                    deck.push(`${colors[c]}${shape[s]}${number[n]}${shading[d]}`)
+                    cards.push(`${colors[c]}${shape[s]}${number[n]}${shading[d]}`)
                 }
             }
         }
     }
 
-    return deck;
+    return cards;
 }
 
 const buildCard = (card_id) => {
@@ -149,43 +149,36 @@ const allDecks = {
 
 */
 
-const deck_id = () => {
-
-    // check exisiting deck_id
-
-    // create new deck id
-
-}
 
 const buildDeck = (shuffled = true) => {
     if (shuffled) {
         const deck_id = ID();
         const cards = shuffle(buildAllCards());
         const remaining = cards.length;
-
-        return  {
-            deck_id,
-            cards,
-            remaining,
-        }
-    } else {
-        const deck_id = ID();
-        const cards = buildAllCards();
-        const remaining = cards.length;
+        const shuffled = true;
 
         return {
             deck_id,
             cards,
             remaining,
+            shuffled,
+        }
+    } else {
+        const deck_id = ID();
+        const cards = buildAllCards();
+        const remaining = cards.length;
+        const shuffled = false;
+
+        return {
+            deck_id,
+            cards,
+            remaining,
+            shuffled,
         }
     }
-    // returns deck;
+
 }
 
-const shuff = buildDeck();
-const notShuff = buildDeck(false);
-
-
-console.log(shuff);
-console.log(`~*~*~*~*~*~*~*~*~**~`);
-console.log(notShuff);
+module.exports = {
+    buildDeck,
+}

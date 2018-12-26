@@ -9,6 +9,7 @@
   "author": "Robert Abreu",
   "license": "ISC",
   "devDependencies": {
+    "firebase-tools": "^6.2.2",
     "nodemon": "^1.18.9"
   },
   "dependencies": {

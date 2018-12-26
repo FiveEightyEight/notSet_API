@@ -24,12 +24,24 @@ app.get('/new/deck/shuffled', (req, res) => {
 
 });
 
-app.get('/new/deck/', (req, res) => {
+app.get('/new/deck', (req, res) => {
 
     const newDeck = set.buildDeck();
 
     res.json(newDeck);
 
+});
+
+app.get('/draw', (req, res) => {
+    const {deck_id, count} = req.query;
+    const drawn = set.drawCard(deck_id, count);
+
+    res.json(drawn);
+});
+
+app.get('/display', (req, res) => {
+
+    res.json(set.display());
 });
 
 app.listen(port, e => {

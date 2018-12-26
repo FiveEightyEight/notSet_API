@@ -9,15 +9,12 @@ const card = {
     shading, // (solid, striped or outlined)   sd    st   ol
 }
 */
-const allCards = {
-    // rd    pp   gr
-    // ov    sq   di
-    // n1    n2   n3
-    // sd    st   ol
 
-
-
-}
+// rd    pp   gr
+// ov    sq   di
+// n1    n2   n3
+// sd    st   ol
+const allCards = {};
 
 // BUILDERS
 
@@ -43,9 +40,9 @@ const buildAllCards = () => {
 
 const buildCard = (card_id) => {
     const colors = { //['rd', 'pp', 'gr'];
-        rd: 'red',
-        pp: 'purple',
-        gr: 'green',
+        rd: 'red', 
+        pp: 'purple',  
+        gr: 'green',  
     }
     const shapes = { // ['ov', 'sq', 'di'];
         ov: 'oval',
@@ -107,6 +104,12 @@ const ID = () => {
     return Math.random().toString(36).substr(2, 9);
 };
 
+const pushToAllDecks = (deck_id, cards) => {
+    allDecks[deck_id] = {
+        cards
+    };
+};
+
 
 // have a function that takes an id and spits out a card 
 
@@ -138,16 +141,17 @@ const playDeck = { // Player Side Deck
 
 }
 
-const allDecks = {
-    deck_id: {
-        cards, // array of card object ids
-    },
-    deck_id2: {
-        cards, // array of card object ids
-    },
-}
-
 */
+const allDecks = {
+    //     deck_id: {
+    //         cards, // array of card object ids
+    //     },
+    //     deck_id2: {
+    //         cards, // array of card object ids
+    //     },
+};
+
+
 
 
 const buildDeck = (shuffled = false) => {
@@ -156,6 +160,8 @@ const buildDeck = (shuffled = false) => {
         const cards = shuffle(buildAllCards());
         const remaining = cards.length;
         const shuffled = true;
+
+        pushToAllDecks(deck_id, cards);
 
         return {
             deck_id,
@@ -169,6 +175,8 @@ const buildDeck = (shuffled = false) => {
         const remaining = cards.length;
         const shuffled = false;
 
+        pushToAllDecks(deck_id, cards);
+
         return {
             deck_id,
             cards,
@@ -179,10 +187,25 @@ const buildDeck = (shuffled = false) => {
 
 }
 
-const draw = () => {
+const drawCard = (deck_id, count) => {
+    if (!allDecks[deck_id]) {
+        return null;
+    }
 
+    const drawn = [];
+    for (let i = 0; i < count; i++) {
+        drawn.push(allDecks[deck_id].cards.shift());
+    }
+    return drawn;
+
+};
+
+const display = () => {
+    return allDecks;
 }
 
 module.exports = {
     buildDeck,
+    drawCard,
+    display,
 }

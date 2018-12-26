@@ -40,9 +40,9 @@ const buildAllCards = () => {
 
 const buildCard = (card_id) => {
     const colors = { //['rd', 'pp', 'gr'];
-        rd: 'red', 
-        pp: 'purple',  
-        gr: 'green',  
+        rd: 'red',
+        pp: 'purple',
+        gr: 'green',
     }
     const shapes = { // ['ov', 'sq', 'di'];
         ov: 'oval',
@@ -108,6 +108,29 @@ const pushToAllDecks = (deck_id, cards) => {
     allDecks[deck_id] = {
         cards
     };
+};
+
+const checkFeatures = (c1, c2, c3) => {
+/*
+    console.log(`
+        checking features
+        card 1: ${c1}
+        card 2: ${c2}
+        card 3: ${c3}
+    `);
+    */
+    if (c1 === c2 && c1 === c3) {
+        // console.log(`all the same`);
+        return true;
+    }
+    if (c1 !== c2 && c1 !== c3 && c2 !== c3) {
+        // console.log(`all different`);
+        return true;
+    }
+
+    // console.log(`two the same`);
+    return false;
+
 };
 
 
@@ -202,10 +225,73 @@ const drawCard = (deck_id, count) => {
 
 const display = () => {
     return allDecks;
-}
+};
+
+
+
+const checkSet = (card1, card2, card3) => {
+
+    for (let i = 0; i < 8; i += 2) {
+        let c1ft = card1[i] + card1[i + 1];
+        let c2ft = card2[i] + card2[i + 1];
+        let c3ft = card3[i] + card3[i + 1];
+
+
+        if (!checkFeatures(c1ft, c2ft, c3ft)) {
+            return false;
+        }
+    }
+    return true;
+};
 
 module.exports = {
     buildDeck,
     drawCard,
     display,
 }
+
+
+console.log(checkSet("rdovn1sd", "rdsqn2st", "rddin3sd"));
+
+// rd    pp   gr
+// ov    sq   di
+// n1    n2   n3
+// sd    st   ol
+
+/*
+"ppovn2sd",
+"grdin3sd",
+"grsqn2ol",
+"ppsqn2st",
+"ppovn3st",
+"rdsqn1sd",
+"rddin1sd",
+"rdsqn3sd",
+"ppovn1ol",
+"ppdin1ol",
+"grovn3sd",
+"ppsqn3sd",
+"ppdin2st",
+"grsqn1ol",
+"ppdin1sd",
+"ppdin1st",
+"rdovn3sd",
+"grdin1st",
+"rdsqn1st",
+"rdsqn2sd",
+"ppdin3sd",
+"grovn1st",
+"grovn3st",
+"grsqn1sd",
+"grovn2ol",
+"rdovn3ol",
+"ppdin3st",
+"rdovn2sd",
+"grdin2sd",
+"rddin3sd",
+"rdsqn1ol",
+"rdsqn3st",
+"grdin3ol",
+"grovn3ol",
+"rddin1ol",
+ */

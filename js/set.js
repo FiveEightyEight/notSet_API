@@ -111,14 +111,14 @@ const pushToAllDecks = (deck_id, cards) => {
 };
 
 const checkFeatures = (c1, c2, c3) => {
-/*
-    console.log(`
-        checking features
-        card 1: ${c1}
-        card 2: ${c2}
-        card 3: ${c3}
-    `);
-    */
+    /*
+        console.log(`
+            checking features
+            card 1: ${c1}
+            card 2: ${c2}
+            card 3: ${c3}
+        `);
+        */
     if (c1 === c2 && c1 === c3) {
         // console.log(`all the same`);
         return true;
@@ -243,6 +243,50 @@ const checkSet = (card1, card2, card3) => {
     }
     return true;
 };
+
+
+const checkTable = (table) => {
+
+    if(table.length <= 2){
+        return false;
+    };
+
+    for (let i = 0; i < table.length - 2; i++) {
+        // first card
+        let card1 = table[i];
+        for (let j = (i + 1); j < table.length - 1; j++) {
+            // second card
+            let card2 = table[j];
+            for (let k = (i + 2); k < table.length; k++) {
+                // third card
+                let card3 = table[k];
+                if (checkSet(card1, card2, card3)){
+                    return [card1, card2, card3];
+                };
+            };
+        };
+    };
+
+    return false;
+};
+
+const play = (table, deck) => {
+    /*
+    if deck is not empty
+        have at 12 cards on field
+            check if there is a SET
+                If a set does NOT exist on play field
+                    allow player to claim NO SET, draw 3 additional cards
+                        repeast last two steps if NO SET
+    */
+};
+
+/*
+
+  <<~~~~~~~~~~~~~~ Testing grounds ~~~~~~~~~~~~~~>>
+
+ */
+
 
 module.exports = {
     buildDeck,

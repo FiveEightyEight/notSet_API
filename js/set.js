@@ -247,7 +247,7 @@ const checkSet = (card1, card2, card3) => {
 
 const checkTable = (table) => {
 
-    if(table.length <= 2){
+    if (table.length <= 2) {
         return false;
     };
 
@@ -260,7 +260,7 @@ const checkTable = (table) => {
             for (let k = (i + 2); k < table.length; k++) {
                 // third card
                 let card3 = table[k];
-                if (checkSet(card1, card2, card3)){
+                if (checkSet(card1, card2, card3)) {
                     return [card1, card2, card3];
                 };
             };
@@ -270,22 +270,42 @@ const checkTable = (table) => {
     return false;
 };
 
-const play = (table, deck) => {
-    /*
-    if deck is not empty
-        have at 12 cards on field
-            check if there is a SET
-                If a set does NOT exist on play field
-                    allow player to claim NO SET, draw 3 additional cards
-                        repeast last two steps if NO SET
-    */
+const play = (table, deck, noSet = false) => {
+
+    if (noSet) {
+        if (table.length < 15) {
+            for (let i = table.length; i < 15; i++) {
+                const drawnCard = deck.shift();
+                table.push(drawnCard);
+            };
+        };
+        return {
+            table,
+            deck,
+            noSet,
+        };
+
+    } else {
+        if (table.length < 12) {
+            for (let i = table.length; i < 12; i++) {
+                const drawnCard = deck.shift();
+                table.push(drawnCard);
+            };
+        };
+        return {
+            table,
+            deck,
+            noSet,
+        };
+    };
 };
 
-/*
 
-  <<~~~~~~~~~~~~~~ Testing grounds ~~~~~~~~~~~~~~>>
 
- */
+// <<~~~~~~~~~~~~~~ Testing grounds ~~~~~~~~~~~~~~>>
+
+// SHUFFLED_DECK= shuffle(buildAllCards());
+
 
 
 module.exports = {
